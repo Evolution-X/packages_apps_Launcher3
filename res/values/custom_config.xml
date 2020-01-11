@@ -17,4 +17,7 @@
 <resources>
     <!-- Quickspace -->
     <item type="id" name="reserved_container_workspace" />
+    
+    <!-- Themed icons -->
+    <string name="drawable_factory_class" translatable="false">com.android.launcher3.icons.ThirdPartyDrawableFactory</string>
 </resources>
