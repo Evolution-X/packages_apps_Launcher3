@@ -137,8 +137,7 @@ public class BgDataModel {
      * Load id for which the callbacks were successfully bound
      */
     public int lastLoadId = -1;
-    public boolean isFirstPagePinnedItemEnabled = QSB_ON_FIRST_SCREEN
-            && !enableSmartspaceRemovalToggle();
+    public boolean isFirstPagePinnedItemEnabled = FeatureFlags.USE_QUICKSPACE_VIEW;
 
     /**
      * Clears all the data
@@ -162,8 +161,7 @@ public class BgDataModel {
                 screenSet.add(item.screenId);
             }
         }
-        if ((FeatureFlags.QSB_ON_FIRST_SCREEN
-                && !SHOULD_SHOW_FIRST_PAGE_WIDGET)
+        if (FeatureFlags.USE_QUICKSPACE_VIEW
                 || screenSet.isEmpty()) {
             screenSet.add(Workspace.FIRST_SCREEN_ID);
         }

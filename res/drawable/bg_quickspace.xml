@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-     Copyright (C) 2024 The Android Open Source Project
+<!-- Copyright (C) 2018-2024 crDroid Android Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -14,11 +13,5 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<com.android.quickstep.views.AddDesktopButton
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:launcher="http://schemas.android.com/apgk/res-auto"
-    android:id="@+id/add_desktop_button"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:src="@drawable/ic_desktop_add"
-    android:padding="10dp" />
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle" />

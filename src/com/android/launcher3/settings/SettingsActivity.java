@@ -29,6 +29,7 @@ import static com.android.launcher3.states.RotationHelper.ALLOW_ROTATION_PREFERE
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -55,8 +56,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.android.launcher3.BuildConfig;
 import com.android.launcher3.Flags;
 import com.android.launcher3.InvariantDeviceProfile;
+import com.android.launcher3.LauncherAppState;
 import com.android.launcher3.LauncherFiles;
+import com.android.launcher3.LauncherPrefs;
 import com.android.launcher3.R;
+import com.android.launcher3.Utilities;
 import com.android.launcher3.lineage.LineageUtils;
 import com.android.launcher3.lineage.trust.TrustAppsActivity;
 import com.android.launcher3.states.RotationHelper;
@@ -67,7 +71,8 @@ import com.android.launcher3.util.SettingsCache;
  * Settings activity for Launcher. Currently implements the following setting: Allow rotation
  */
 public class SettingsActivity extends FragmentActivity
-        implements OnPreferenceStartFragmentCallback, OnPreferenceStartScreenCallback {
+        implements OnPreferenceStartFragmentCallback, OnPreferenceStartScreenCallback,
+        SharedPreferences.OnSharedPreferenceChangeListener {
 
     @VisibleForTesting
     static final String DEVELOPER_OPTIONS_KEY = "pref_developer_options";
@@ -129,8 +134,32 @@ public class SettingsActivity extends FragmentActivity
             // Display the fragment as the main content.
             fm.beginTransaction().replace(R.id.content_frame, f).commit();
         }
+        LauncherPrefs.getPrefs(this).registerOnSharedPreferenceChangeListener(this);
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        LauncherPrefs.getPrefs(this).unregisterOnSharedPreferenceChangeListener(this);
+    }
+
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) { 
+        switch (key) {
+            case Utilities.DESKTOP_SHOW_QUICKSPACE:
+            case Utilities.KEY_SHOW_ALT_QUICKSPACE:
+            case Utilities.KEY_SHOW_QUICKSPACE_NOWPLAYING:
+            case Utilities.KEY_SHOW_QUICKSPACE_WEATHER:
+            case Utilities.KEY_SHOW_QUICKSPACE_PSONALITY:
+            case Utilities.KEY_SHOW_QUICKSPACE_WEATHER_CITY:
+            case Utilities.KEY_SHOW_QUICKSPACE_WEATHER_TEXT:
+                LauncherAppState.INSTANCE.executeIfCreated(app -> app.setNeedsRestart());
+                break;
+            default:
+                break;
+        }
+    }
+        
     private boolean startPreference(String fragment, Bundle args, String key) {
         if (getSupportFragmentManager().isStateSaved()) {
             // Sometimes onClick can come after onPause because of being posted on the handler.
