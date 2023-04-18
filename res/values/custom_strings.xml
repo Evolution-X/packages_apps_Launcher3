@@ -223,4 +223,11 @@
     <string name="quick_event_weather_text_summary">Display current weather condition summary</string>
 
     <string name="intent_no_app_clock_found">Unable to find calendar or clock activity</string>
+    
+    <!-- Restart launcher -->
+    <string name="pref_restart_title">Restart</string>
+    <string name="pref_restart_summary">Restart the launcher manually to apply any pending settings</string>
+    <string name="restarting_launcher">Restarting launcher...</string>
+    <string name="restarting_launcher_changes">Restarting launcher to apply changes...</string>
+    <string name="updating_launcher_components">Restarting launcher to update launcher components...</string>
 </resources>
