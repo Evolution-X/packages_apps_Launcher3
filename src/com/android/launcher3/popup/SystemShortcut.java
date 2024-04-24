@@ -8,12 +8,15 @@ import static com.android.launcher3.logging.StatsLogManager.LauncherEvent.LAUNCH
 import static com.android.launcher3.logging.StatsLogManager.LauncherEvent.LAUNCHER_SYSTEM_SHORTCUT_WIDGETS_TAP;
 import static com.android.launcher3.widget.picker.model.data.WidgetPickerDataUtils.findAllWidgetsForPackageUser;
 
+import android.app.ActivityManagerNative;
+import android.app.IActivityManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ShortcutInfo;
 import android.graphics.Rect;
 import android.os.Process;
+import android.os.RemoteException;
 import android.os.UserHandle;
 import android.util.Log;
 import android.view.InflateException;
@@ -21,6 +24,7 @@ import android.view.View;
 import android.view.accessibility.AccessibilityNodeInfo;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -406,6 +410,34 @@ public abstract class SystemShortcut<T extends ActivityContext> extends ItemInfo
                     .logger()
                     .withItemInfo(mItemInfo)
                     .log(LAUNCHER_PRIVATE_SPACE_UNINSTALL_SYSTEM_SHORTCUT_TAP);
+        }
+    }
+
+    public static final Factory<ActivityContext> KILL_APP = (activity, itemInfo, originalView) -> {
+        String packageName = itemInfo.getTargetComponent().getPackageName();
+        return packageName == null ? null : new KillApp(activity, itemInfo, originalView);
+    };
+
+    public static class KillApp extends SystemShortcut<ActivityContext> {
+        private final String mPackageName;
+
+        public KillApp(ActivityContext target, ItemInfo itemInfo, View originalView) {
+            super(R.drawable.ic_kill_app, R.string.recent_task_option_kill_app,
+                    target, itemInfo, originalView);
+            mPackageName = itemInfo.getTargetComponent().getPackageName();
+        }
+
+        @Override
+        public void onClick(View view) {
+            if (mPackageName != null) {
+                IActivityManager iam = ActivityManagerNative.getDefault();
+                try {
+                    iam.forceStopPackage(mPackageName, UserHandle.USER_CURRENT);
+                    Toast appKilled = Toast.makeText(view.getContext(), R.string.recents_app_killed, Toast.LENGTH_SHORT);
+                    appKilled.show();
+                    AbstractFloatingView.closeAllOpenViews(mTarget);
+                } catch (RemoteException e) { }
+            }
         }
     }
 
