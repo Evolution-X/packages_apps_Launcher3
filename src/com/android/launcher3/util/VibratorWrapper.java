@@ -123,6 +123,27 @@ public class VibratorWrapper {
             });
         }
     }
+    
+    public void vibrateForSearchHint() {
+        if (mVibrator.areAllPrimitivesSupported(PRIMITIVE_LOW_TICK)) {
+            float startScalePercent = 0.0f;
+            float endScalePercent = 1.0f;
+            int scaleExponent = 1;
+            int iterations = 50;
+            int delay = 0;
+            VibrationEffect.Composition startComposition = VibrationEffect.startComposition();
+            for (int i = 0; i < iterations; i++) {
+                float progress = i / (float) (iterations - 1);
+                float scale = (float) Math.pow((progress * endScalePercent) + ((1.0f - progress) * startScalePercent), scaleExponent);
+                if (i == 0) {
+                    startComposition.addPrimitive(PRIMITIVE_LOW_TICK, scale, delay);
+                } else {
+                    startComposition.addPrimitive(PRIMITIVE_LOW_TICK, scale);
+                }
+            }
+            vibrate(startComposition.compose());
+        }
+    }
 
     /** Indicates that Taskbar has been invoked. */
     public void vibrateForTaskbarUnstash() {

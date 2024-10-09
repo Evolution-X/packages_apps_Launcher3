@@ -57,6 +57,7 @@ import com.android.systemui.shared.recents.model.Task;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.concurrent.CountDownLatch;
 import java.util.function.BiFunction;
 import java.util.function.Supplier;
 
