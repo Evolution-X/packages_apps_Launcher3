@@ -14,6 +14,6 @@
      limitations under the License.
 -->
 <shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
-    <solid android:color="?attr/allappsHeaderProtectionColor" />
+    <solid android:color="@color/themed_icon_background_color" />
     <corners android:radius="@dimen/rounded_button_radius" />
 </shape>
