@@ -101,7 +101,7 @@ public class BaseDepthController {
 
     public BaseDepthController(Launcher activity) {
         mLauncher = activity;
-        mMaxBlurRadius = activity.getResources().getInteger(R.integer.max_depth_blur_radius);
+        mMaxBlurRadius = 0;
         mWallpaperManager = activity.getSystemService(WallpaperManager.class);
 
         MultiPropertyFactory<BaseDepthController> depthProperty =
@@ -146,11 +146,11 @@ public class BaseDepthController {
             return;
         }
         if (mSurface == null) {
-            Log.d(TAG, "mSurface is null and mCurrentBlur is: " + mCurrentBlur);
+            //Log.d(TAG, "mSurface is null and mCurrentBlur is: " + mCurrentBlur);
             return;
         }
         if (!mSurface.isValid()) {
-            Log.d(TAG, "mSurface is not valid");
+            //Log.d(TAG, "mSurface is not valid");
             mWaitingOnSurfaceValidity = true;
             onInvalidSurface();
             return;
@@ -208,8 +208,8 @@ public class BaseDepthController {
     protected void setSurface(SurfaceControl surface) {
         if (mSurface != surface || mWaitingOnSurfaceValidity) {
             mSurface = surface;
-            Log.d(TAG, "setSurface:\n\tmWaitingOnSurfaceValidity: " + mWaitingOnSurfaceValidity
-                    + "\n\tmSurface: " + mSurface);
+            //Log.d(TAG, "setSurface:\n\tmWaitingOnSurfaceValidity: " + mWaitingOnSurfaceValidity
+             //       + "\n\tmSurface: " + mSurface);
             applyDepthAndBlur();
         }
     }
