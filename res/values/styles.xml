@@ -62,8 +62,8 @@
         <item name="pageIndicatorDotColor">@color/page_indicator_dot_color_light</item>
         <item name="focusOutlineColor">@color/materialColorSecondaryFixed</item>
         <item name="focusInnerOutlineColor">@color/materialColorOnSecondaryFixedVariant</item>
-        <item name="folderPreviewColor">@color/folder_preview_light</item>
-        <item name="folderBackgroundColor">@color/folder_background_light</item>
+        <item name="folderPreviewColor">@*android:color/system_neutral1_100</item>
+        <item name="folderBackgroundColor">@*android:color/system_neutral1_100</item>
         <item name="folderIconBorderColor">?android:attr/colorPrimary</item>
         <item name="isFolderDarkText">true</item>
         <item name="folderTextColor">@color/folder_text_color_light</item>
@@ -129,8 +129,8 @@
         <item name="notificationDotColor">@color/notification_dot_color_dark</item>
         <item name="widgetsTheme">@style/WidgetContainerTheme.Dark</item>
         <item name="pageIndicatorDotColor">@color/page_indicator_dot_color_dark</item>
-        <item name="folderPreviewColor">@color/folder_preview_dark</item>
-        <item name="folderBackgroundColor">@color/folder_background_dark</item>
+        <item name="folderPreviewColor">@*android:color/system_neutral1_800</item>
+        <item name="folderBackgroundColor">@*android:color/system_neutral1_800</item>
         <item name="folderIconBorderColor">?android:attr/colorPrimary</item>
         <item name="isFolderDarkText">false</item>
         <item name="folderTextColor">@color/folder_text_color_dark</item>
