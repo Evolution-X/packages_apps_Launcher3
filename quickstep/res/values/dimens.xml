@@ -33,7 +33,7 @@
 
     <!--  Overview Task Views  -->
     <!--  The thumbnail uses up to this much of the total screen height/width in Overview -->
-    <item name="overview_max_scale" format="float" type="dimen">0.7</item>
+    <item name="overview_max_scale" format="float" type="dimen">0.65</item>
     <!--  The thumbnail should not go smaller than this much of the total screen height/width in
              tablet app to Overview carousel -->
     <item name="overview_carousel_min_scale" format="float" type="dimen">0.46</item>
@@ -90,7 +90,7 @@
 
     <!-- Overrideable in overlay that provides the Overview Actions. -->
     <dimen name="overview_actions_top_margin">24dp</dimen>
-    <dimen name="overview_actions_height">48dp</dimen>
+    <dimen name="overview_actions_height">112dp</dimen>
     <dimen name="overview_actions_button_spacing">36dp</dimen>
 
     <!-- These speeds are in dp/s -->
