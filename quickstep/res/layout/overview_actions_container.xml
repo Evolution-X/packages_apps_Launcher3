@@ -45,8 +45,8 @@
                 android:layout_width="150dp"
                 android:layout_height="48dp"
                 android:text="@string/recents_clear_all"
-                android:tint="?android:attr/colorAccent"
-                android:textColor="?android:attr/colorAccent"
+                android:tint="@color/themed_icon_color"
+                android:textColor="@color/themed_icon_color"
                 android:background="@drawable/bg_overview_clear_all_button" />
 
             <Space
@@ -76,7 +76,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_screenshot"
-                android:tint="?android:attr/colorAccent"
+                android:tint="@color/themed_icon_color"
                 android:background="@drawable/bg_overview_clear_all_button" />
 
             <Space
@@ -91,7 +91,7 @@
                  android:layout_width="wrap_content"
                  android:layout_height="wrap_content"
                  android:src="@drawable/ic_recents_pin"
-                 android:tint="?android:attr/colorAccent"
+                 android:tint="@color/themed_icon_color"
                  android:background="@drawable/bg_overview_clear_all_button" />
 
             <Space
@@ -106,7 +106,7 @@
                 style="@style/OverviewActionButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:tint="?android:attr/colorAccent"
+                android:tint="@color/themed_icon_color"
                 android:background="@drawable/bg_overview_clear_all_button"
                 android:visibility="gone" />
 
@@ -127,7 +127,7 @@
         style="@style/OverviewActionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:tint="?android:attr/colorAccent"
+        android:tint="@color/themed_icon_color"
         android:background="@drawable/bg_overview_clear_all_button"
         android:layout_gravity="bottom|center_horizontal"
         android:visibility="gone" />
