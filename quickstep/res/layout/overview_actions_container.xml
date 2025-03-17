@@ -98,8 +98,7 @@
                 android:id="@+id/action_split_space"
                 android:layout_width="24dp"
                 android:layout_height="1dp"
-                android:layout_weight="1"
-                android:visibility="gone" />
+                android:layout_weight="1" />
 
             <ImageButton
                 android:id="@+id/action_split"
@@ -107,8 +106,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:tint="@color/themed_icon_color"
-                android:background="@drawable/bg_overview_clear_all_button"
-                android:visibility="gone" />
+                android:background="@drawable/bg_overview_clear_all_button" />
 
             <Space
                 android:id="@+id/end_space"
