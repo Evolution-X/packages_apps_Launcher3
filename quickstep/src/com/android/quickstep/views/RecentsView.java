@@ -3682,6 +3682,8 @@ public abstract class RecentsView<
             @Nullable TaskView dismissedTaskView,
             boolean animateTaskView, boolean shouldRemoveTask, long duration,
             boolean dismissingForSplitSelection) {
+        boolean isTaskLocked = mLockedTasks.contains(dismissedTaskView.getFirstTask().key.getPackageName());
+        if (isTaskLocked) return;
         if (mPendingAnimation != null) {
             mPendingAnimation.createPlaybackController().dispatchOnCancel().dispatchOnEnd();
         }
