@@ -964,7 +964,7 @@ public final class Utilities {
         MODEL_EXECUTOR.execute(() -> {
             final Handler handler = new Handler(Looper.getMainLooper());
             handler.postDelayed(() -> {
-                android.os.Process.killProcess(android.os.Process.myPid());
+                System.exit(0);
             }, WAIT_BEFORE_RESTART);
         });
     }
