@@ -82,7 +82,9 @@ public class NavHandleLongPressHandler implements ResourceBasedOverride {
      *
      * @param navHandle to handle the animation for this touch
      */
-    public void onTouchStarted(NavHandle navHandle) {}
+    public void onTouchStarted(NavHandle navHandle) {
+        navHandle.animateNavBarLongPress(true, true, 200L);
+    }
 
     /**
      * Called when nav handle gesture is finished by the user lifting their finger or the system
@@ -91,5 +93,7 @@ public class NavHandleLongPressHandler implements ResourceBasedOverride {
      * @param navHandle to handle the animation for this touch
      * @param reason why the touch ended
      */
-    public void onTouchFinished(NavHandle navHandle, String reason) {}
+    public void onTouchFinished(NavHandle navHandle, String reason) {
+        navHandle.animateNavBarLongPress(false, true, 200L);
+    }
 }
