@@ -531,6 +531,9 @@ public class TaskbarDragController extends DragController<BaseTaskbarContext> im
     @Override
     protected void endDrag() {
         if (mDisallowGlobalDrag) {
+            if (mDragObject == null) {
+                return;
+            }
             // We need to explicitly set deferDragViewCleanupPostAnimation to true here so the
             // super call doesn't remove it from the drag layer before the animation completes.
             // This variable gets set in to false in super.dispatchDropComplete() because it
