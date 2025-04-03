@@ -60,6 +60,7 @@ public class AppsSearchContainerLayout extends ExtendedEditText
     private final SpannableStringBuilder mSearchQueryBuilder;
 
     private ActivityAllAppsContainerView<?> mAppsView;
+    private int mHorizontalMargin = 0;
 
     // The amount of pixels to shift down and overlap with the rest of the content.
     private final int mContentOverlap;
@@ -83,6 +84,9 @@ public class AppsSearchContainerLayout extends ExtendedEditText
 
         mContentOverlap =
                 getResources().getDimensionPixelSize(R.dimen.all_apps_search_bar_content_overlap);
+                
+        mHorizontalMargin =
+                getResources().getDimensionPixelSize(R.dimen.search_box_background_offset);
     }
 
     @Override
@@ -195,6 +199,8 @@ public class AppsSearchContainerLayout extends ExtendedEditText
     public void setInsets(Rect insets) {
         MarginLayoutParams mlp = (MarginLayoutParams) getLayoutParams();
         mlp.topMargin = insets.top;
+        mlp.leftMargin = mHorizontalMargin;
+        mlp.rightMargin = mHorizontalMargin;
         requestLayout();
     }
 
