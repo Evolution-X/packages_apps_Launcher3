@@ -996,7 +996,7 @@ public final class Utilities {
         Context appContext = context.getApplicationContext();
         ContextualSearchManager contextualSearchManager = 
             (ContextualSearchManager) appContext.getSystemService(Context.CONTEXTUAL_SEARCH_SERVICE);
-        if (contextualSearchManager == null) {
+        if (contextualSearchManager == null || !isLongPressSearchEnabled(context)) {
             return false;
         }
         try {
@@ -1007,8 +1007,9 @@ public final class Utilities {
     }
     
     public static boolean isLongPressSearchEnabled(Context context) {
-        return Settings.Secure.getInt(
-            context.getApplicationContext().getContentResolver(), "search_press_hold_nav_handle_enabled", 1) == 1;
+        return Settings.Secure.getInt(context.getContentResolver(),
+                Settings.Secure.SEARCH_ALL_ENTRYPOINTS_ENABLED, 1)
+                == 1;
     }
 
     public static boolean showQuickspace(Context context) {
