@@ -161,13 +161,47 @@
 
     <!-- A derivative project can extend these themes to customize the application theme without
          affecting the base theme -->
-    <style name="AppTheme" parent="@style/LauncherTheme" />
-    <style name="AppTheme.DarkMainColor" parent="@style/LauncherTheme.DarkMainColor" />
-    <style name="AppTheme.DarkText" parent="@style/LauncherTheme.DarkText" />
+    <style name="AppTheme" parent="@style/LauncherTheme">
+        <item name="qsbFillColor">#ffffffff</item>
+        <item name="qsbFillColorThemedAllApps">@color/themed_icon_background_color</item>
+        <item name="qsbFillColorThemedHomeScreen">@color/materialColorSurfaceContainerLow</item>
+        <item name="qsbIconTintPrimary">#ea4335</item>
+        <item name="qsbIconTintQuaternary">#4285f4</item>
+        <item name="qsbIconTintSecondary">#fbbc05</item>
+        <item name="qsbIconTintTertiary">#34a853</item>
+        <item name="searchboxHighlight">#00ff00</item>
+    </style>
+    <style name="AppTheme.DarkMainColor" parent="@style/LauncherTheme.DarkMainColor">
+        <item name="qsbFillColor">#ffffffff</item>
+        <item name="qsbFillColorThemedAllApps">@color/themed_icon_background_color</item>
+        <item name="qsbFillColorThemedHomeScreen">@color/materialColorSurfaceContainerLow</item>
+        <item name="searchboxHighlight">#00ff00</item>
+    </style>
+    <style name="AppTheme.DarkText" parent="@style/LauncherTheme.DarkText">
+        <item name="qsbFillColor">#f1f1f0</item>
+        <item name="qsbFillColorThemedAllApps">@color/themed_icon_background_color</item>
+        <item name="qsbFillColorThemedHomeScreen">@color/materialColorSurfaceContainerLow</item>
+        <item name="searchboxHighlight">#00ff00</item>
+    </style>
 
-    <style name="AppTheme.Dark" parent="@style/LauncherTheme.Dark" />
-    <style name="AppTheme.Dark.DarkMainColor" parent="@style/LauncherTheme.Dark.DarkMainColor" />
-    <style name="AppTheme.Dark.DarkText" parent="@style/LauncherTheme.Dark.DarkText" />
+    <style name="AppTheme.Dark" parent="@style/LauncherTheme.Dark">
+        <item name="qsbFillColor">@color/materialColorSurfaceBright</item>
+        <item name="qsbFillColorThemedAllApps">@color/themed_icon_background_color</item>
+        <item name="qsbFillColorThemedHomeScreen">@color/materialColorSurfaceContainerLow</item>
+        <item name="searchboxHighlight">#00ff00</item>
+    </style>
+    <style name="AppTheme.Dark.DarkMainColor" parent="@style/LauncherTheme.Dark.DarkMainColor">
+        <item name="qsbFillColor">@color/materialColorSurfaceBright</item>
+        <item name="qsbFillColorThemedAllApps">@color/themed_icon_background_color</item>
+        <item name="qsbFillColorThemedHomeScreen">@color/materialColorSurfaceContainerLow</item>
+        <item name="searchboxHighlight">#00ff00</item>
+    </style>
+    <style name="AppTheme.Dark.DarkText" parent="@style/LauncherTheme.Dark.DarkText">
+        <item name="qsbFillColor">@color/materialColorSurfaceBright</item>
+        <item name="qsbFillColorThemedAllApps">@color/themed_icon_background_color</item>
+        <item name="qsbFillColorThemedHomeScreen">@color/materialColorSurfaceContainerLow</item>
+        <item name="searchboxHighlight">#00ff00</item>
+    </style>
 
     <style name="HomeSettings.Theme" parent="@android:style/Theme.DeviceDefault.Settings">
         <item name="android:navigationBarColor">?android:colorPrimaryDark</item>
@@ -465,5 +499,19 @@
         <item name="android:textColor">@color/materialColorOnSurface</item>
         <item name="android:fontFamily">@*android:string/config_bodyFontFamilyMedium</item>
         <item name="android:ellipsize">end</item>
+    </style>
+    
+    <style name="QsbIconTint" parent="">
+        <item name="qsbIconTintPrimary">#ea4335</item>
+        <item name="qsbIconTintQuaternary">#4285f4</item>
+        <item name="qsbIconTintSecondary">#fbbc05</item>
+        <item name="qsbIconTintTertiary">#34a853</item>
+    </style>
+    
+    <style name="QsbIconTint.Themed" parent="@style/QsbIconTint">
+        <item name="qsbIconTintPrimary">@color/qsb_icon_tint_primary</item>
+        <item name="qsbIconTintQuaternary">@color/qsb_icon_tint_quaternary</item>
+        <item name="qsbIconTintSecondary">@color/qsb_icon_tint_secondary</item>
+        <item name="qsbIconTintTertiary">@color/qsb_icon_tint_tertiary</item>
     </style>
 </resources>

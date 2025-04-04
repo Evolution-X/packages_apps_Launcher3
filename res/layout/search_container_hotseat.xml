@@ -1,20 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-     Copyright (C) 2021 The Android Open Source Project
-
-     Licensed under the Apache License, Version 2.0 (the "License");
-     you may not use this file except in compliance with the License.
-     You may obtain a copy of the License at
-
-          http://www.apache.org/licenses/LICENSE-2.0
-
-     Unless required by applicable law or agreed to in writing, software
-     distributed under the License is distributed on an "AS IS" BASIS,
-     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-     See the License for the specific language governing permissions and
-     limitations under the License.
--->
-<View
+<com.android.launcher3.qsb.SearchWidgetView 
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/search_container_hotseat"
     android:layout_width="match_parent"
-    android:layout_height="0dp" />
+    android:layout_height="@dimen/qsb_widget_height"
+    android:layout_alignParentTop="true"
+    android:layout_centerHorizontal="true"
+    android:layout_gravity="center_vertical"
+    android:gravity="center_vertical"
+    android:contentDescription="@string/label_search"
+    android:background="@drawable/bg_google_qsb"
+    android:backgroundTint="@color/hotseat_qsb_bg_color">
+    <ImageView
+        android:layout_gravity="start|center_vertical"
+        android:id="@+id/g_icon"
+        android:background="?android:attr/selectableItemBackgroundBorderless"
+        android:padding="@dimen/qsb_g_icon_padding"
+        android:layout_width="@dimen/qsb_icon_tap_size"
+        android:layout_height="@dimen/qsb_icon_tap_size"
+        android:src="@drawable/ic_super_g_color"
+        android:contentDescription="@string/label_g_icon"
+        android:layout_marginStart="@dimen/qsb_g_icon_marginStart"/>
+    <com.android.launcher3.qsb.AssistantIconView
+        android:layout_gravity="end|center_vertical"
+        android:id="@+id/mic_icon"
+        android:background="?android:attr/selectableItemBackgroundBorderless"
+        android:focusable="false"
+        android:clickable="true"
+        android:layout_width="@dimen/qsb_icon_tap_size"
+        android:layout_height="match_parent"
+        android:contentDescription="@string/label_voice_search"
+        android:layout_marginEnd="@dimen/qsb_mic_icon_marginEnd"/>
+    <ImageButton
+        android:layout_gravity="end|center_vertical"
+        android:id="@+id/lens_icon"
+        android:background="?android:attr/selectableItemBackgroundBorderless"
+        android:padding="@dimen/qsb_lens_padding"
+        android:focusable="false"
+        android:clickable="true"
+        android:layout_width="@dimen/qsb_icon_tap_size"
+        android:layout_height="match_parent"
+        android:src="@drawable/ic_lens_color"
+        android:scaleType="fitCenter"
+        android:contentDescription="@string/label_lens"
+        android:layout_marginEnd="@dimen/qsb_marginEnd"/>
+</com.android.launcher3.qsb.SearchWidgetView>

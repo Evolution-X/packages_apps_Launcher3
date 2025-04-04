@@ -267,4 +267,11 @@
     
     <!-- Preference default value -->
     <string name="pref_value_default">Default</string>
+    
+    <!-- QSB -->
+    <string name="label_lens">Google Lens</string>
+    <string name="label_g_icon">Google App</string>
+    <string name="label_voice_search">Voice search</string>
+    <string name="label_search">Search</string>
+    <string name="pref_hotseat_enabled_title">Show hotseat search bar</string>
 </resources>

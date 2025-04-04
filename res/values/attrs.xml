@@ -84,6 +84,16 @@
     <attr name="widgetCellTitleColor" format="color" />
     <attr name="widgetCellSubtitleColor" format="color" />
 
+    <attr name="qsbEdgeRadius" format="dimension"/>
+    <attr name="qsbFillColor" format="color"/>
+    <attr name="qsbFillColorThemedAllApps" format="color"/>
+    <attr name="qsbFillColorThemedHomeScreen" format="color"/>
+    <attr name="qsbIconTintPrimary" format="color"/>
+    <attr name="qsbIconTintQuaternary" format="color"/>
+    <attr name="qsbIconTintSecondary" format="color"/>
+    <attr name="qsbIconTintTertiary" format="color"/>
+    <attr name="searchboxHighlight" format="color"/>
+
     <!-- BubbleTextView specific attributes. -->
     <declare-styleable name="BubbleTextView">
         <attr name="layoutHorizontal" format="boolean" />

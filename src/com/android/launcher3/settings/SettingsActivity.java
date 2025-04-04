@@ -161,6 +161,7 @@ public class SettingsActivity extends FragmentActivity
             case Utilities.KEY_SHOW_QUICKSPACE_PSONALITY:
             case Utilities.KEY_SHOW_QUICKSPACE_WEATHER_CITY:
             case Utilities.KEY_SHOW_QUICKSPACE_WEATHER_TEXT:
+            case Utilities.KEY_HOTSEAT_ENABLED:
                 LauncherAppState.INSTANCE.executeIfCreated(app -> app.setNeedsRestart());
                 break;
             default:

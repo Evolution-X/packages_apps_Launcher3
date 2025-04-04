@@ -104,6 +104,7 @@
     <dimen name="min_page_snap_velocity">1500dp</dimen>
 
     <!-- All Apps -->
+    <dimen name="all_apps_search_vertical_offset">27dp</dimen>
     <dimen name="all_apps_starting_vertical_translate">300dp</dimen>
     <dimen name="all_apps_search_bar_field_height">48dp</dimen>
     <!-- all_apps_search_bar_field_height / 2 -->
@@ -440,8 +441,18 @@
     </dimen>
     <dimen name="taskbar_stashed_size">0dp</dimen>
     <dimen name="search_box_background_offset">24dp</dimen>
-    <dimen name="qsb_widget_height">0dp</dimen>
-    <dimen name="qsb_shadow_height">0dp</dimen>
+    <dimen name="qsb_g_icon_marginStart">4dp</dimen>
+    <dimen name="qsb_g_icon_padding">6dp</dimen>
+    <dimen name="qsb_icon_tap_size">48dp</dimen>
+    <dimen name="qsb_lens_padding">8dp</dimen>
+    <dimen name="qsb_marginEnd">4dp</dimen>
+    <dimen name="qsb_margin_top_adjusting">18dp</dimen>
+    <dimen name="qsb_margin_top_adjusting_large">56dp</dimen>
+    <dimen name="qsb_shadow_height">6dp</dimen>
+    <dimen name="qsb_text_input_marginStart_large">16dp</dimen>
+    <dimen name="qsb_text_input_marginStart_small">0dp</dimen>
+    <dimen name="qsb_widget_height">63dp</dimen>
+    <dimen name="qsb_mic_icon_marginEnd">52dp</dimen>
     <dimen name="min_hotseat_icon_space">18dp</dimen>
     <dimen name="max_hotseat_icon_space">50dp</dimen>
     <dimen name="min_hotseat_qsb_width">0dp</dimen>

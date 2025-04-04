@@ -37,6 +37,7 @@ import androidx.annotation.IntDef;
 import androidx.annotation.Nullable;
 
 import com.android.launcher3.celllayout.CellLayoutLayoutParams;
+import com.android.launcher3.qsb.SearchWidgetView;
 import com.android.launcher3.util.HorizontalInsettableView;
 import com.android.launcher3.util.MultiPropertyFactory;
 import com.android.launcher3.util.MultiPropertyFactory.MultiProperty;
@@ -251,7 +252,7 @@ public class Hotseat extends CellLayout implements Insettable {
             mQsb.setVisibility(View.VISIBLE);
             lp.gravity = Gravity.BOTTOM;
             lp.width = ViewGroup.LayoutParams.MATCH_PARENT;
-            lp.height = grid.hotseatBarSizePx;
+            lp.height = grid.hotseatBarSizePx + ((SearchWidgetView) mQsb).getTopInset();
         }
 
         Rect padding = grid.getHotseatLayoutPadding(getContext());
@@ -320,7 +321,13 @@ public class Hotseat extends CellLayout implements Insettable {
         int right = left + qsbMeasuredWidth;
 
         int bottom = b - t - dp.getQsbOffsetY();
-        int top = bottom - dp.hotseatQsbHeight;
+        
+        int top = (dp.isTablet) 
+                    ? bottom - dp.hotseatQsbHeight - ((SearchWidgetView) mQsb).getTopInset()
+                    : bottom - dp.hotseatQsbHeight + ((SearchWidgetView) mQsb).getTopInset();
+
+        bottom = top + dp.hotseatQsbHeight;
+
         mQsb.layout(left, top, right, bottom);
     }
 
