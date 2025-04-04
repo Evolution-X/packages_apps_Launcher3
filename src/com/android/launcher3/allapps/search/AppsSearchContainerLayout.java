@@ -22,16 +22,23 @@ import static android.view.View.MeasureSpec.makeMeasureSpec;
 import static com.android.launcher3.Utilities.prefixTextWithIcon;
 import static com.android.launcher3.icons.IconNormalizer.ICON_VISIBLE_AREA_FACTOR;
 
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.graphics.Rect;
+import android.net.Uri;
 import android.text.Selection;
 import android.text.SpannableStringBuilder;
 import android.text.method.TextKeyListener;
 import android.util.AttributeSet;
+import android.view.ContextThemeWrapper;
+import android.view.MotionEvent;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup.MarginLayoutParams;
+
+import androidx.core.content.ContextCompat;
 
 import com.android.launcher3.DeviceProfile;
 import com.android.launcher3.ExtendedEditText;
@@ -40,11 +47,17 @@ import com.android.launcher3.R;
 import com.android.launcher3.allapps.ActivityAllAppsContainerView;
 import com.android.launcher3.allapps.AllAppsStore;
 import com.android.launcher3.allapps.BaseAllAppsAdapter.AdapterItem;
+import com.android.launcher3.LauncherPrefChangeListener;
+import com.android.launcher3.LauncherPrefs;
 import com.android.launcher3.allapps.PrivateProfileManager;
 import com.android.launcher3.allapps.SearchUiManager;
 import com.android.launcher3.search.SearchCallback;
+import com.android.launcher3.util.Themes;
 import com.android.launcher3.util.ApiWrapper;
+import com.android.launcher3.Utilities;
 import com.android.launcher3.views.ActivityContext;
+
+import com.android.internal.util.android.Utils;
 
 import java.util.ArrayList;
 
@@ -53,7 +66,7 @@ import java.util.ArrayList;
  */
 public class AppsSearchContainerLayout extends ExtendedEditText
         implements SearchUiManager, SearchCallback<AdapterItem>,
-        AllAppsStore.OnUpdateListener, Insettable {
+        AllAppsStore.OnUpdateListener, Insettable, LauncherPrefChangeListener {
 
     private final ActivityContext mLauncher;
     private final AllAppsSearchBarController mSearchBarController;
@@ -93,12 +106,56 @@ public class AppsSearchContainerLayout extends ExtendedEditText
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
         mAppsView.getAppsStore().addUpdateListener(this);
+        LauncherPrefs.Companion.get(getContext()).addListener(this, LauncherPrefs.THEMED_ICONS);
+        updateSearchBar();
     }
 
     @Override
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
+        LauncherPrefs.Companion.get(getContext()).removeListener(this, LauncherPrefs.THEMED_ICONS);
         mAppsView.getAppsStore().removeUpdateListener(this);
+    }
+
+    @Override
+    public void onPrefChanged(String key) {
+        if ("themed_icons".equals(key)) {
+            updateSearchBar();
+        }
+    }
+
+    void updateSearchBar() {
+        Context context = getContext();
+        boolean isGsaInstalled = Utils.isPackageInstalled(
+                context, Utilities.GSA_PACKAGE);
+
+        int attrColor = Themes.getAttrColor(context, R.attr.qsbFillColor);
+        int style = R.style.QsbIconTint;
+
+        if (Themes.isThemedIconEnabled(context)) {
+            attrColor = Themes.getAttrColor(context, R.attr.qsbFillColorThemedAllApps);
+            style = R.style.QsbIconTint_Themed;
+        }
+
+        Context themedContext = new ContextThemeWrapper(context, style);
+
+        if (getBackground() != null) getBackground().setTint(attrColor);
+
+        int startDrawableRes = isGsaInstalled ? R.drawable.ic_super_g_color : R.drawable.ic_allapps_search;
+        Drawable startDrawable = ContextCompat.getDrawable(themedContext, startDrawableRes);
+
+        Drawable endDrawable = null;
+        if (isGsaInstalled) {
+            endDrawable = ContextCompat.getDrawable(themedContext, R.drawable.ic_lens_color);
+        }
+
+        setCompoundDrawablesRelativeWithIntrinsicBounds(startDrawable, null, endDrawable, null);
+        
+        if (isGsaInstalled) {
+            setHint(null);
+        } else {
+            setHint(getContext().getString(R.string.all_apps_search_bar_hint));
+        }
     }
 
     @Override
@@ -207,6 +264,75 @@ public class AppsSearchContainerLayout extends ExtendedEditText
     @Override
     public ExtendedEditText getEditText() {
         return this;
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        if (event.getAction() == MotionEvent.ACTION_UP) {
+            if (Utils.isPackageInstalled(getContext(), "rk.android.app.pixelsearch")) {
+                if (event.getX() >= 0 && event.getX() <= getWidth() && event.getY() >= 0 && event.getY() <= getHeight()) {
+                    launchPixelSearch();
+                    return true;
+                }
+            }
+
+            Drawable endDrawable = getCompoundDrawablesRelative()[2];
+            if (endDrawable != null) {
+                int iconStartX = getWidth() - getPaddingEnd() - endDrawable.getBounds().width();
+                if (event.getX() >= iconStartX) {
+                    launchLensSearch();
+                    return true;
+                }
+            }
+
+            Drawable startDrawable = getCompoundDrawablesRelative()[0];
+            if (startDrawable != null) {
+                int iconEndX = startDrawable.getBounds().width();
+                if (event.getX() <= iconEndX) {
+                    launchSearch();
+                    return true;
+                }
+            }
+        }
+        return super.onTouchEvent(event);
+    }
+
+    private void launchLensSearch() {
+        try {
+            Intent lensIntent = new Intent(Intent.ACTION_VIEW);
+            lensIntent.setComponent(new ComponentName(Utilities.GSA_PACKAGE, Utilities.LENS_ACTIVITY));
+            lensIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            lensIntent.setData(Uri.parse(Utilities.LENS_URI));
+            lensIntent.putExtra("LensHomescreenShortcut", true);
+            getContext().startActivity(lensIntent);
+        } catch (Exception e) {}
+    }
+
+    private void launchSearch() {
+        boolean isGsaInstalled = Utils.isPackageInstalled(
+                getContext(), Utilities.GSA_PACKAGE);
+        try {
+            Intent intent = new Intent();
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            
+            if (isGsaInstalled) {
+                intent.setAction("android.search.action.GLOBAL_SEARCH");
+                intent.setPackage(Utilities.GSA_PACKAGE);
+            } else {
+                intent.setAction(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse("https://www.google.com/search?q="));
+            }
+            getContext().startActivity(intent);
+        } catch (Exception e) {}
+    }
+
+    private void launchPixelSearch() {
+        try {
+            Intent intent = new Intent();
+            intent.setPackage("rk.android.app.pixelsearch");
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            getContext().startActivity(intent);
+        } catch (Exception e) {}
     }
 
     private void privateSpaceQuery() {
