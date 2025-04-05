@@ -27,7 +27,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.graphics.Rect;
-import android.net.Uri;
 import android.text.Selection;
 import android.text.SpannableStringBuilder;
 import android.text.method.TextKeyListener;
@@ -52,6 +51,7 @@ import com.android.launcher3.LauncherPrefs;
 import com.android.launcher3.allapps.PrivateProfileManager;
 import com.android.launcher3.allapps.SearchUiManager;
 import com.android.launcher3.search.SearchCallback;
+import com.android.launcher3.util.ActivityLauncher;
 import com.android.launcher3.util.Themes;
 import com.android.launcher3.util.ApiWrapper;
 import com.android.launcher3.Utilities;
@@ -269,70 +269,63 @@ public class AppsSearchContainerLayout extends ExtendedEditText
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         if (event.getAction() == MotionEvent.ACTION_UP) {
-            if (Utils.isPackageInstalled(getContext(), "rk.android.app.pixelsearch")) {
-                if (event.getX() >= 0 && event.getX() <= getWidth() && event.getY() >= 0 && event.getY() <= getHeight()) {
-                    launchPixelSearch();
-                    return true;
-                }
-            }
+            float x = event.getX();
+            float y = event.getY();
 
             Drawable endDrawable = getCompoundDrawablesRelative()[2];
             if (endDrawable != null) {
-                int iconStartX = getWidth() - getPaddingEnd() - endDrawable.getBounds().width();
-                if (event.getX() >= iconStartX) {
-                    launchLensSearch();
+                int endWidth = endDrawable.getIntrinsicWidth();
+                int endHeight = endDrawable.getIntrinsicHeight();
+
+                int paddingEnd = getPaddingEnd();
+                int endLeft = getWidth() - getCompoundPaddingRight();
+                int endTop = (getHeight() - endHeight) / 2;
+
+                Rect lensBounds = new Rect(
+                    endLeft - paddingEnd,
+                    endTop - paddingEnd,
+                    endLeft + endWidth + paddingEnd,
+                    endTop + endHeight + paddingEnd
+                );
+
+                if (lensBounds.contains((int) x, (int) y)) {
+                    ActivityLauncher.launchLensSearch(getContext());
                     return true;
                 }
             }
 
             Drawable startDrawable = getCompoundDrawablesRelative()[0];
             if (startDrawable != null) {
-                int iconEndX = startDrawable.getBounds().width();
-                if (event.getX() <= iconEndX) {
-                    launchSearch();
+                int startWidth = startDrawable.getIntrinsicWidth();
+                int startHeight = startDrawable.getIntrinsicHeight();
+
+                int paddingStart = getPaddingStart();
+                int startLeft = getCompoundPaddingLeft();
+                int startTop = (getHeight() - startHeight) / 2;
+
+                Rect searchBounds = new Rect(
+                    startLeft - paddingStart,
+                    startTop - paddingStart,
+                    startLeft + startWidth + paddingStart,
+                    startTop + startHeight + paddingStart
+                );
+
+                if (searchBounds.contains((int) x, (int) y)) {
+                    ActivityLauncher.launchSearch(getContext());
+                    return true;
+                }
+            }
+
+            if (Utilities.isPixelSearchInstalled(getContext())) {
+                Rect fullBounds = new Rect(0, 0, getWidth(), getHeight());
+                if (fullBounds.contains((int) x, (int) y)) {
+                    ActivityLauncher.launchPixelSearch(getContext());
                     return true;
                 }
             }
         }
+
         return super.onTouchEvent(event);
-    }
-
-    private void launchLensSearch() {
-        try {
-            Intent lensIntent = new Intent(Intent.ACTION_VIEW);
-            lensIntent.setComponent(new ComponentName(Utilities.GSA_PACKAGE, Utilities.LENS_ACTIVITY));
-            lensIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            lensIntent.setData(Uri.parse(Utilities.LENS_URI));
-            lensIntent.putExtra("LensHomescreenShortcut", true);
-            getContext().startActivity(lensIntent);
-        } catch (Exception e) {}
-    }
-
-    private void launchSearch() {
-        boolean isGsaInstalled = Utils.isPackageInstalled(
-                getContext(), Utilities.GSA_PACKAGE);
-        try {
-            Intent intent = new Intent();
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            
-            if (isGsaInstalled) {
-                intent.setAction("android.search.action.GLOBAL_SEARCH");
-                intent.setPackage(Utilities.GSA_PACKAGE);
-            } else {
-                intent.setAction(Intent.ACTION_VIEW);
-                intent.setData(Uri.parse("https://www.google.com/search?q="));
-            }
-            getContext().startActivity(intent);
-        } catch (Exception e) {}
-    }
-
-    private void launchPixelSearch() {
-        try {
-            Intent intent = new Intent();
-            intent.setPackage("rk.android.app.pixelsearch");
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            getContext().startActivity(intent);
-        } catch (Exception e) {}
     }
 
     private void privateSpaceQuery() {

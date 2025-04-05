@@ -101,6 +101,8 @@ import com.android.launcher3.views.ActivityContext;
 import com.android.launcher3.views.BaseDragLayer;
 import com.android.launcher3.widget.PendingAddShortcutInfo;
 
+import com.android.internal.util.android.Utils;
+
 import java.lang.reflect.Method;
 import java.util.Collections;
 import java.util.List;
@@ -163,6 +165,7 @@ public final class Utilities {
     public static final String GSA_PACKAGE = "com.google.android.googlequicksearchbox";
     public static final String LENS_ACTIVITY = "com.google.android.apps.search.lens.LensExportedActivity";
     public static final String LENS_URI = "google://lens";
+    public static final String PIXEL_SEARCH_PACKAGE = "rk.android.app.pixelsearch";
 
     public static final String DESKTOP_SHOW_QUICKSPACE = "pref_show_quickspace";
     public static final String KEY_SHOW_ALT_QUICKSPACE = "pref_show_alt_quickspace";
@@ -1055,5 +1058,13 @@ public final class Utilities {
     public static boolean hotseatEnabled(Context context) {
         SharedPreferences prefs = LauncherPrefs.getPrefs(context.getApplicationContext());
         return prefs.getBoolean(KEY_HOTSEAT_ENABLED, true);
+    }
+    
+    public static boolean isGsaInstalled(Context context) {
+        return Utils.isPackageInstalled(context, GSA_PACKAGE);
+    }
+    
+    public static boolean isPixelSearchInstalled(Context context) {
+        return Utils.isPackageInstalled(context, PIXEL_SEARCH_PACKAGE);
     }
 }

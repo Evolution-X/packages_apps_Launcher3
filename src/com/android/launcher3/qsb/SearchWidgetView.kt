@@ -33,6 +33,7 @@ import com.android.launcher3.R
 import com.android.launcher3.DeviceProfile
 import com.android.launcher3.LauncherPrefChangeListener
 import com.android.launcher3.LauncherPrefs
+import com.android.launcher3.util.ActivityLauncher
 import com.android.launcher3.util.Themes
 import com.android.launcher3.Utilities
 import com.android.launcher3.views.ActivityContext
@@ -102,35 +103,9 @@ class SearchWidgetView @JvmOverloads constructor(
     }
 
     private fun setClickListeners() {
-        setOnClickListener { launchSearch() }
-        searchIcon.setOnClickListener { launchSearch() }
-        lensIcon.setOnClickListener { launchLensSearch() }
-    }
-
-    private fun launchSearch() {
-        val intent = Intent().apply {
-            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
-            if (isGoogleInstalled) {
-                action = "android.search.action.GLOBAL_SEARCH"
-                setPackage(Utilities.GSA_PACKAGE)
-            } else {
-                action = Intent.ACTION_VIEW
-                data = Uri.parse("https://www.google.com/search?q=")
-            }
-        }
-
-        runCatching { context.startActivity(intent) }
-    }
-
-    private fun launchLensSearch() {
-        val lensIntent = Intent(Intent.ACTION_VIEW).apply {
-            component = ComponentName(Utilities.GSA_PACKAGE, Utilities.LENS_ACTIVITY)
-            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
-            data = Uri.parse(Utilities.LENS_URI)
-            putExtra("LensHomescreenShortcut", true)
-        }
-
-        runCatching { context.startActivity(lensIntent) }
+        setOnClickListener { ActivityLauncher.launchSearch(context) }
+        searchIcon.setOnClickListener { ActivityLauncher.launchSearch(context) }
+        lensIcon.setOnClickListener { ActivityLauncher.launchLensSearch(context) }
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
