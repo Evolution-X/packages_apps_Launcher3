@@ -322,11 +322,14 @@ public class Hotseat extends CellLayout implements Insettable {
 
         int bottom = b - t - dp.getQsbOffsetY();
         
-        int top = (dp.isTablet) 
-                    ? bottom - dp.hotseatQsbHeight - ((SearchWidgetView) mQsb).getTopInset()
+        boolean showHotseat = !dp.isTablet && Utilities.hotseatEnabled(getContext());
+        int top = (!showHotseat) 
+                    ? bottom - dp.hotseatQsbHeight
                     : bottom - dp.hotseatQsbHeight + ((SearchWidgetView) mQsb).getTopInset();
 
-        bottom = top + dp.hotseatQsbHeight;
+        if (showHotseat) {
+            bottom = top + dp.hotseatQsbHeight;
+        }
 
         mQsb.layout(left, top, right, bottom);
     }

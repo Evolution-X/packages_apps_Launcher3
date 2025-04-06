@@ -139,7 +139,7 @@ class SearchWidgetView @JvmOverloads constructor(
     }
 
     fun getTopInset(): Int = if (dp.isTablet) {
-        resources.getDimensionPixelOffset(R.dimen.qsb_margin_top_adjusting_large)
+        0
     } else {
         resources.getDimensionPixelSize(R.dimen.qsb_margin_top_adjusting)
     }
