@@ -24,7 +24,7 @@
     <string name="quickspace_category_title">Quickspace</string>
 
     <!-- QuickSpace: QuickEvent: Device Intro Event -->
-    <string name="quick_event_rom_intro_welcome">Welcome to the axion.</string>
+    <string name="quick_event_rom_intro_welcome">This is Evolution X!</string>
     <string name="quick_event_rom_intro_welcome_ext">Gotta go fast!</string>
     <string-array name="welcome_message_variants">
         <item>Thank you for choosing us</item>
@@ -172,12 +172,10 @@
         <item>Oh hey, what\'s up?</item>
         <item>Focus on your tasks</item>
         <item>How many screenshots do you take?</item>
-        <item>Open goodness with Axion</item>
         <item>Spread love, not havoc</item>
         <item>We didn\'t start the fire!</item>
         <item>Time for some good music</item>
         <item>\u003C\u003C\u003C\u003C\u003C\u003C\u003C HEAD</item>
-        <item>You need Axion Premium to see this</item>
         <item>Remember the Lineage of the Unicorn</item>
         <item>Enjoy Xtended battery life</item>
         <item>Starting from the ground zero</item>
