@@ -23,7 +23,7 @@ import android.widget.ImageView
 
 import com.android.launcher3.R
 import com.android.launcher3.Utilities
-import com.android.internal.util.android.Utils
+import com.android.internal.util.evolution.Utils
 
 class AssistantIconView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyle: Int = 0

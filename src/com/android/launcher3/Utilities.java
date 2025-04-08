@@ -101,7 +101,7 @@ import com.android.launcher3.views.ActivityContext;
 import com.android.launcher3.views.BaseDragLayer;
 import com.android.launcher3.widget.PendingAddShortcutInfo;
 
-import com.android.internal.util.android.Utils;
+import com.android.internal.util.evolution.Utils;
 
 import java.lang.reflect.Method;
 import java.util.Collections;

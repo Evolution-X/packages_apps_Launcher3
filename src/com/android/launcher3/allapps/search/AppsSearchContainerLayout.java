@@ -57,7 +57,7 @@ import com.android.launcher3.util.ApiWrapper;
 import com.android.launcher3.Utilities;
 import com.android.launcher3.views.ActivityContext;
 
-import com.android.internal.util.android.Utils;
+import com.android.internal.util.evolution.Utils;
 
 import java.util.ArrayList;
 

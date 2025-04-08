@@ -38,7 +38,7 @@ import com.android.launcher3.util.Themes
 import com.android.launcher3.Utilities
 import com.android.launcher3.views.ActivityContext
 
-import com.android.internal.util.android.Utils
+import com.android.internal.util.evolution.Utils
 
 class SearchWidgetView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyle: Int = 0
