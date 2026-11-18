@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2018-2019 The LineageOS Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources>
+    <string name="pref_themed_icons_title">استخدام الأيقونات المنسّقة في الدرج</string>
+    <string name="pref_themed_icons_summary">اتّباع الأيقونات المنسّقة المستخدمة على الشاشة الرئيسية</string>
+    <string name="pebble_shape_title">حصاة</string>
+    <string name="vessel_shape_title">وعاء</string>
+    <string name="pure_square_shape_title">مربع خالص</string>
+    <string name="squircle_shape_title">مربع دائري</string>
+    <string name="tapered_rect_shape_title">مستطيل مستدق</string>
+    <string name="teardrop_shape_title">قطرة</string>
+    <string name="rounded_rect_shape_title">مستطيل مستدير</string>
+    <string name="pref_suggestions_title">الاقتراحات</string>
+    <string name="pref_suggestions_summary">لاقتراحات درج التطبيقات والشاشة الرئيسية</string>
+    <string name="settings_lock_layout_title">قفل التخطيط</string>
+    <string name="settings_lock_layout_summary_on">لا يمكن إضافة الأيقونات والودجات أو إزالتها أو نقلها على الشاشة الرئيسية</string>
+    <string name="settings_lock_layout_summary_off">يمكن إضافة الأيقونات والودجات أو إزالتها أو نقلها على الشاشة الرئيسية</string>
+    <string name="settings_edit_widgets_error">لا يمكن إضافة ودجات إلى الشاشة الرئيسية</string>
+    <string name="desktop_show_labels">إظهار تسميات الأيقونات على سطح المكتب</string>
+    <string name="drawer_show_labels">إظهار تسميات الأيقونات في الدرج</string>
+    <string name="pref_show_hotseat_qsb_title">إظهار شريط البحث</string>
+    <string name="pref_show_hotseat_qsb_summary">في أسفل الشاشة الرئيسية</string>
+    <string name="drawer_open_keyboard_title">التمرير لبدء البحث</string>
+    <string name="drawer_open_keyboard_summary">فتح لوحة المفاتيح كلما ظهر درج التطبيقات</string>
+    <string name="title_show_google_app">إظهار تطبيق Google</string>
+    <string name="msg_minus_one_on_left">عند التمرير لليمين من الشاشة الرئيسية</string>
+    <string name="msg_minus_one_on_right">عند التمرير لليسار من الشاشة الرئيسية</string>
+    <string name="pref_sleep_gesture_title">النقر المزدوج للنوم</string>
+    <string name="pref_sleep_gesture_summary">انقر نقرًا مزدوجًا على مساحة فارغة في الشاشة الرئيسية لإيقاف الشاشة</string>
+    <string name="trust_apps_manager_name">التطبيقات المخفية والمحمية</string>
+    <string name="trust_apps_auth_manager">افتح القفل لإدارة التطبيقات المخفية والمحمية</string>
+    <string name="trust_apps_auth_open_app">المصادقة لفتح %1$s</string>
+    <string name="trust_apps_loading">جارٍ التحميل…</string>
+    <string name="trust_apps_no_lock_error">يرجى إعداد شاشة قفل آمنة لتقييد الوصول إلى التطبيقات</string>
+    <string name="trust_apps_help">مساعدة</string>
+    <string name="trust_apps_info_hidden">التطبيقات المخفية وودجاتها مخفية من الدرج</string>
+    <string name="trust_apps_info_protected">تتطلب التطبيقات المحمية المصادقة لفتحها من المشغّل</string>
+    <string name="lineageos_app_name">Trebuchet</string>
+    <string name="google_folder_title">Google</string>
+</resources>
